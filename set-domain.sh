@@ -34,7 +34,7 @@ fi
 
 echo "Rewriting $CURRENT  ->  $NEW"
 
-for f in index.html robots.txt sitemap.xml; do
+for f in index.html privacy.html terms.html accessibility.html robots.txt sitemap.xml; do
   if [ -f "$f" ]; then
     # macOS and GNU sed both accept this form.
     sed -i.bak "s#${CURRENT}#${NEW}#g" "$f"
