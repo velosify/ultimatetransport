@@ -345,7 +345,7 @@ h1{
 /* ============================================================
    SECTIONS
    ============================================================ */
-.sec{border-top:1px solid var(--rule);padding-block:clamp(3.25rem,7vw,6rem)}
+.sec{padding-block:clamp(3.25rem,7vw,6rem)}
 .head{max-width:44rem;margin-bottom:clamp(2rem,4vw,3rem)}
 .head.wide{max-width:56rem}
 .tag{
@@ -355,6 +355,12 @@ h1{
 }
 h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-width:20ch}
 .head p{margin:0;color:var(--ink-2);font-size:var(--s-1);text-wrap:pretty}
+
+.strip{padding-block:clamp(1.5rem,3.5vw,2.6rem) clamp(1.75rem,4vw,3rem)}
+.sr-only{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
 
 /* --- trips grid --- */
 .trips{
@@ -522,8 +528,7 @@ input::placeholder,textarea::placeholder{color:var(--ink-3)}
 
 /* --- final CTA --- */
 .final{
-  border-top:1px solid var(--rule);
-  padding-block:clamp(3.5rem,8vw,7rem);
+  padding-block:clamp(3.5rem,8vw,7rem) clamp(4rem,9vw,7.5rem);
   text-align:center;
 }
 .final h2{margin-inline:auto;max-width:16ch;font-size:var(--s-3)}
@@ -537,7 +542,7 @@ input::placeholder,textarea::placeholder{color:var(--ink-3)}
 .final .cta{margin-top:1.6rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem}
 
 /* --- footer --- */
-footer{border-top:1px solid var(--rule);padding-block:2.25rem 2.75rem;font-size:var(--s--1);color:var(--ink-3)}
+footer{background:var(--wash);padding-block:2.5rem 3rem;font-size:var(--s--1);color:var(--ink-3)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:.7rem 2rem;align-items:center;justify-content:space-between}
 footer a{display:inline-block;padding:.55rem 0;color:var(--ink-2);text-decoration:none;font-weight:600}
 footer a:hover{color:var(--brand)}
