@@ -588,57 +588,75 @@ footer a:hover{color:var(--brand)}
 
       <div class="hero-stage">
         <div class="routecard">
-          <svg viewBox="0 0 600 600" role="img" aria-label="Illustration of a route across the Twin Cities from a home pickup to a clinic">
+          <svg viewBox="0 0 600 600" role="img" aria-label="Illustration of a route across the Twin Cities from a home pickup, over the river, to a clinic">
+            <defs>
+              <path id="riv" d="M-30 292 C 60 312 130 332 200 337 C 285 343 335 327 402 335 C 495 347 548 386 630 404"/>
+              <!-- Land mask: the street grid is cut wherever the river runs,
+                   so roads dead-end at the bank instead of all bridging it. -->
+              <mask id="land">
+                <rect width="600" height="600" fill="#fff"/>
+                <use href="#riv" fill="none" stroke="#000" stroke-width="58" stroke-linecap="round"/>
+              </mask>
+            </defs>
+
             <rect width="600" height="600" fill="#F1F6FB"/>
 
             <!-- parks -->
-            <path d="M40 430c40-30 96-26 118 6 20 30-6 72-48 78-46 6-104-46-70-84z" fill="#E3EDE7"/>
-            <path d="M430 40c44-14 96 14 100 56 4 40-40 66-78 56-44-12-62-98-22-112z" fill="#E3EDE7"/>
-
-            <!-- river -->
-            <path d="M-20 232c96 4 132 62 196 88 68 28 118-14 176 6 52 18 74 78 268 66"
-                  fill="none" stroke="#CBDFEF" stroke-width="46" stroke-linecap="round"/>
-
-            <!-- roads -->
-            <g stroke="#FFFFFF" stroke-width="13" stroke-linecap="round" fill="none">
-              <path d="M-10 130h620"/>
-              <path d="M-10 386h620"/>
-              <path d="M-10 520h620"/>
-              <path d="M132 -10v620"/>
-              <path d="M330 -10v620"/>
-              <path d="M486 -10v620"/>
-            </g>
-            <g stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" fill="none" opacity=".85">
-              <path d="M-10 64h620"/><path d="M-10 300h620"/><path d="M-10 458h620"/>
-              <path d="M62 -10v620"/><path d="M232 -10v620"/><path d="M408 -10v620"/><path d="M556 -10v620"/>
+            <g mask="url(#land)">
+              <path d="M34 92c46-34 108-28 132 8 22 34-8 82-54 88C60 194-4 128 34 92z" fill="#E3EDE7"/>
+              <path d="M470 452c40-26 96-16 112 18 14 32-16 70-58 72-44 2-92-58-54-90z" fill="#E3EDE7"/>
             </g>
 
-            <!-- blocks -->
-            <g fill="#E0EAF4">
-              <rect x="150" y="146" width="60" height="42" rx="5"/>
-              <rect x="252" y="146" width="58" height="42" rx="5"/>
-              <rect x="352" y="316" width="42" height="52" rx="5"/>
-              <rect x="428" y="404" width="42" height="38" rx="5"/>
-              <rect x="80" y="404" width="36" height="38" rx="5"/>
+            <!-- river: bank, then water -->
+            <use href="#riv" fill="none" stroke="#B7D2E6" stroke-width="58" stroke-linecap="round"/>
+            <use href="#riv" fill="none" stroke="#CBDFEF" stroke-width="50" stroke-linecap="round"/>
+
+            <!-- street grid, cut at the water -->
+            <g mask="url(#land)">
+              <g stroke="#FFFFFF" stroke-width="13" stroke-linecap="round" fill="none">
+                <path d="M-10 168h620"/><path d="M-10 386h620"/><path d="M-10 524h620"/>
+                <path d="M132 -10v620"/><path d="M330 -10v620"/><path d="M486 -10v620"/>
+              </g>
+              <g stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" fill="none" opacity=".9">
+                <path d="M-10 96h620"/><path d="M-10 244h620"/><path d="M-10 300h620"/><path d="M-10 458h620"/>
+                <path d="M62 -10v620"/><path d="M232 -10v620"/><path d="M408 -10v620"/><path d="M556 -10v620"/>
+              </g>
+              <g fill="#E0EAF4">
+                <rect x="150" y="112" width="62" height="40" rx="5"/>
+                <rect x="252" y="112" width="58" height="40" rx="5"/>
+                <rect x="352" y="188" width="44" height="42" rx="5"/>
+                <rect x="504" y="188" width="40" height="42" rx="5"/>
+                <rect x="252" y="404" width="60" height="38" rx="5"/>
+                <rect x="352" y="474" width="44" height="36" rx="5"/>
+                <rect x="80" y="404" width="38" height="38" rx="5"/>
+              </g>
             </g>
 
-            <!-- route: follows the street grid, no shortcuts through backyards -->
-            <path d="M132 470 L132 402 Q132 386 148 386 L314 386 Q330 386 330 370 L330 316 Q330 300 346 300 L470 300 Q486 300 486 284 L486 176"
-                  fill="none" stroke="#0E3355" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".22"/>
-            <path class="rc-dash" d="M132 470 L132 402 Q132 386 148 386 L314 386 Q330 386 330 370 L330 316 Q330 300 346 300 L470 300 Q486 300 486 284 L486 176"
-                  fill="none" stroke="#0E3355" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- the two bridges, with a visible deck edge -->
+            <g fill="none" stroke-linecap="butt">
+              <path d="M132 282V368" stroke="#9DBBD4" stroke-width="21"/>
+              <path d="M132 282V368" stroke="#FFFFFF" stroke-width="13"/>
+              <path d="M486 307V393" stroke="#9DBBD4" stroke-width="21"/>
+              <path d="M486 307V393" stroke="#FFFFFF" stroke-width="13"/>
+            </g>
+
+            <!-- route: along streets, over the west bridge -->
+            <path d="M132 470 L132 260 Q132 244 148 244 L314 244 Q330 244 330 228 L330 184 Q330 168 346 168 L486 168" fill="none" stroke="#0E3355" stroke-width="9"
+                  stroke-linecap="round" stroke-linejoin="round" opacity=".22"/>
+            <path class="rc-dash" d="M132 470 L132 260 Q132 244 148 244 L314 244 Q330 244 330 228 L330 184 Q330 168 346 168 L486 168" fill="none" stroke="#0E3355" stroke-width="9"
+                  stroke-linecap="round" stroke-linejoin="round"/>
 
             <!-- pickup, on the street outside the door -->
             <circle cx="132" cy="470" r="20" fill="#fff"/>
             <circle cx="132" cy="470" r="11" fill="#0E3355"/>
 
             <!-- destination pin, tip on the street it fronts -->
-            <path d="M486 76c-21 0-38 17-38 38 0 27 38 62 38 62s38-35 38-62c0-21-17-38-38-38z" fill="#B4571C"/>
-            <circle cx="486" cy="114" r="13.5" fill="#fff"/>
+            <path d="M486 68c-21 0-38 17-38 38 0 27 38 62 38 62s38-35 38-62c0-21-17-38-38-38z" fill="#B4571C"/>
+            <circle cx="486" cy="106" r="13.5" fill="#fff"/>
 
-            <!-- vehicle, mid-route -->
-            <circle cx="330" cy="340" r="17" fill="#0E3355"/>
-            <circle cx="330" cy="340" r="6.5" fill="#fff"/>
+            <!-- the van, mid-crossing -->
+            <circle cx="132" cy="347" r="16" fill="#0E3355"/>
+            <circle cx="132" cy="347" r="6" fill="#fff"/>
           </svg>
           <div class="rc-chip">
             <span class="dot"></span><span>Pickup at your door &middot; <b>St. Paul</b></span>
