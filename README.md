@@ -1,6 +1,6 @@
 # Ultimate Transport, landing page
 
-One-page site for **Ultimate Transport**, Billy O's wheelchair transportation
+One-page site for **Ultimate Transport**, Bill O's wheelchair transportation
 service in St. Paul, Minnesota.
 
 Static HTML. No build step, no framework, no dependencies. `index.html` is the
@@ -111,7 +111,7 @@ This means:
 - no inbox to check, requests land as text messages on the scheduling line
 - no personal information passes through any third party
 
-If you later want a form that emails Billy instead, that needs a Cloudflare
+If you later want a form that emails Bill instead, that needs a Cloudflare
 Pages Function plus an email service (Resend, Postmark, or similar). It's about
 thirty lines of code and one API key.
 
@@ -130,7 +130,7 @@ Everything is in `index.html`. The pieces you'll most likely touch:
 | Colors | the CSS custom properties in `:root` (light) and the two dark-theme blocks |
 | Link preview card | edit `assets/og-card.html`, screenshot it at 1200×630, save over `assets/og-image.png` |
 
-Four answers in the FAQ carry a `BILLY TO CONFIRM` comment in the source. Search for
+Four answers in the FAQ carry a `BILL TO CONFIRM` comment in the source. Search for
 that string before the site gets promoted anywhere.
 
 **When you change a phone number, change it everywhere.** There are several
@@ -142,7 +142,7 @@ it in all three `:root` blocks or one theme will break.
 
 ---
 
-## Still to confirm with Billy
+## Still to confirm with Bill
 
 The page deliberately makes **no claims** about hours, rates, insurance,
 Medicaid or MA billing, licensing, vehicle count, or years in business,
@@ -156,7 +156,7 @@ Open items:
 4. Insurance / Medicaid / waiver billing
 5. Licensing and credentials
 6. How much advance notice a booking really needs
-7. Whether the town list matches where Billy actually drives
+7. Whether the town list matches where Bill actually drives
 8. Whether the named St. Paul hospitals and clinics are places he actually serves
 9. An email address, if he wants one on the page
 10. **A real photo of the van**, the single highest-value addition to this page
