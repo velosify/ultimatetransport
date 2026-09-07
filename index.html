@@ -368,23 +368,24 @@ h1{
   }
   .routecard{
     max-width:none;width:100vw;
-    aspect-ratio:1/1.08;
+    aspect-ratio:1/0.89;
     border:0;border-radius:0;box-shadow:none;
   }
-  /* The map draws square, ending short of the card's bottom edge, so the fade
-     has empty ground to dissolve into and never washes out the pickup marker. */
-  .routecard svg{height:100vw}
+  /* The map draws short of the card's bottom edge, so the fade has empty ground
+     to dissolve into and never washes out the pickup marker. */
+  .routecard svg{height:84vw}
   .routecard::after{
-    content:"";position:absolute;inset:auto 0 -1px 0;height:23%;z-index:2;
+    content:"";position:absolute;inset:auto 0 -1px 0;height:22%;z-index:2;
     background:linear-gradient(to bottom,
       rgba(255,255,255,0) 0%,
-      rgba(255,255,255,.45) 32%,
-      rgba(255,255,255,.90) 57%,
-      var(--paper) 78%);
+      rgba(255,255,255,.28) 45%,
+      rgba(255,255,255,.72) 75%,
+      var(--paper) 96%);
     pointer-events:none;
   }
-  .rc-chip{left:var(--gutter);bottom:35%}
+  .rc-chip{left:var(--gutter);bottom:30%}
   .hero-copy{padding-top:.25rem}
+  .hero-sub{margin-bottom:1.4rem}
 }
 @keyframes dash{to{stroke-dashoffset:-50}}
 @media (prefers-reduced-motion:reduce){
@@ -503,6 +504,21 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
 .row p{margin:.35rem 0 0;color:var(--ink-2);font-size:var(--s--1);line-height:1.65;max-width:40rem;grid-column:1/-1}
 @media (min-width:52rem){ .row p{margin:0;grid-column:auto} }
 
+/* --- "How it works" runs on a blue panel, white type ---
+   Blue is #1C5A8C rather than a pale tint because white body copy on a pale
+   blue is unreadable; this is the lightest blue that still clears WCAG AA
+   for the older readers this page is written for (7.3:1 white on the panel,
+   6.4:1 for the body copy). */
+.sec--blue{background:var(--brand-hi);color:var(--on-brand)}
+.sec--blue .tag{color:#BEDCF2}
+.sec--blue .head p{color:#E4EFF8}
+.sec--blue .rows{border-top-color:rgba(255,255,255,.28)}
+.sec--blue .row{border-bottom-color:rgba(255,255,255,.28)}
+.sec--blue .ix{color:#B5DAF2}
+.sec--blue .row p{color:#E4EFF8}
+.sec--blue a{color:#FFFFFF}
+.sec--blue a:focus-visible{outline-color:#FFFFFF}
+
 /* --- area split --- */
 .area{display:grid;gap:2rem}
 @media (min-width:56rem){ .area{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:3.5rem} }
@@ -599,16 +615,6 @@ footer a{display:inline-block;padding:.55rem 0;color:var(--ink-2);text-decoratio
 footer a:hover{color:var(--brand)}
 
 /* --- sticky mobile call bar --- */
-.callbar{position:fixed;inset:auto 0 0 0;z-index:40;background:var(--brand);display:flex;box-shadow:0 -6px 24px rgba(14,30,41,.16)}
-.callbar a{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.12rem;
-  padding:.75rem .5rem calc(.75rem + env(safe-area-inset-bottom));
-  color:var(--on-brand);text-decoration:none;font-weight:700;min-height:4rem;
-}
-.callbar a + a{border-left:1px solid color-mix(in srgb, var(--on-brand) 26%, transparent)}
-.callbar .lbl{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;opacity:.9;font-weight:600}
-.callbar .num{font-family:"Archivo",sans-serif;font-size:1.22rem;font-variant-numeric:tabular-nums}
-@media (min-width:900px){ .callbar{display:none} }
 
 /* ============================================================
    MOTION: a single entrance on load. Nothing is ever parked
@@ -625,7 +631,40 @@ footer a:hover{color:var(--brand)}
 }
 @keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
+/* --- reveal on scroll ---
+   Content is visible by default. Only when the head script has confirmed
+   IntersectionObserver support and no reduced-motion preference does it put
+   .js-reveal on <html>, which is what actually hides anything. If the observer
+   never reports back, the same script drops that class and everything shows,
+   so a scripting failure can never leave the page blank. */
+.rv{transition:opacity .65s cubic-bezier(.2,.7,.3,1), transform .65s cubic-bezier(.2,.7,.3,1)}
+.js-reveal .rv{opacity:0;transform:translateY(20px)}
+.js-reveal .rv.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{transition:none}
+  .js-reveal .rv{opacity:1;transform:none}
+}
+
 </style>
+<script>
+/* Arm the scroll reveals before first paint so nothing flashes in and out.
+   Everything below is a guard: no observer support, a reduced-motion
+   preference, or an observer that never reports back all leave the page in
+   its plain, fully visible state. */
+(function () {
+  var root = document.documentElement;
+  try {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    root.classList.add("js-reveal");
+    setTimeout(function () {
+      if (!window.__revealsRunning) root.classList.remove("js-reveal");
+    }, 3000);
+  } catch (e) {
+    root.classList.remove("js-reveal");
+  }
+})();
+</script>
 </head>
 <body>
 <a class="skip" href="#rides">Skip to content</a>
@@ -918,7 +957,7 @@ footer a:hover{color:var(--brand)}
   </section>
 
   <!-- ============================ HOW ============================ -->
-  <section id="how" class="sec">
+  <section id="how" class="sec sec--blue">
     <div class="wrap">
       <div class="head">
         <span class="tag">How it works</span>
@@ -1226,10 +1265,6 @@ footer a:hover{color:var(--brand)}
   </div>
 </footer>
 
-<nav class="callbar" aria-label="Quick contact">
-  <a href="tel:+16512741881"><span class="lbl">Scheduling</span><span class="num">651-274-1881</span></a>
-  <a href="tel:+16512742138"><span class="lbl">Cell</span><span class="num">651-274-2138</span></a>
-</nav>
 
 <script>
 /* Ride request -> pre-filled SMS, with a clipboard fallback. */
@@ -1329,6 +1364,77 @@ footer a:hover{color:var(--brand)}
   });
 
   refresh();
+})();
+</script>
+
+<script>
+/* Scroll reveals. The head script decided whether these run at all; this one
+   only wires up the observer and reports back that it is alive. */
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains("js-reveal")) return;
+
+  var groups = [
+    ".sec > .wrap > .head",
+    ".trips > .trip",
+    ".trips-note",
+    ".rows > .row",
+    ".area > *",
+    ".formcard", ".formnote",
+    ".faq > details",
+    ".cards > .card", ".owner",
+    ".final > .wrap > *"
+  ];
+
+  var targets = [];
+  groups.forEach(function (sel) {
+    var nodes = document.querySelectorAll(sel);
+    var seen = new Map();
+    Array.prototype.forEach.call(nodes, function (el) {
+      // Stagger within each parent, capped so a long list never crawls in.
+      var i = seen.get(el.parentNode) || 0;
+      seen.set(el.parentNode, i + 1);
+      el.style.transitionDelay = Math.min(i, 4) * 70 + "ms";
+      el.classList.add("rv");
+      targets.push(el);
+    });
+  });
+
+  if (!targets.length) { root.classList.remove("js-reveal"); return; }
+
+  /* A position sweep rather than an IntersectionObserver: a fast fling past a
+     section can carry it from below the viewport to above it between two
+     observer ticks, which fires no callback and leaves that section blank for
+     good. Comparing positions has no such hole, and anything already scrolled
+     past reveals on the next frame. */
+  var pending = targets.slice();
+  var ticking = false;
+
+  function sweep() {
+    ticking = false;
+    window.__revealsRunning = true;
+    var line = window.innerHeight * 0.94;
+    for (var i = pending.length - 1; i >= 0; i--) {
+      if (pending[i].getBoundingClientRect().top < line) {
+        pending[i].classList.add("is-in");
+        pending.splice(i, 1);
+      }
+    }
+    if (!pending.length) {
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+    }
+  }
+
+  function queue() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(sweep);
+  }
+
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
+  sweep();
 })();
 </script>
 </body>
