@@ -25,6 +25,7 @@ assets/
   icon-512.png          512×512, Android / manifest
   og-image.png          1200×630 link preview card
   og-card.html          source for og-image.png, edit + re-screenshot to change it
+  app-store-badge.svg   Apple's official badge (US/UK black lockup)
 ```
 
 The only external request the page makes is to **Google Fonts** for Archivo and
@@ -146,6 +147,25 @@ structured data that Google reads).
 
 The page is designed for light and dark themes. If you change a color, change
 it in all three `:root` blocks or one theme will break.
+
+---
+
+## The App Store badge
+
+The hero and the closing CTA carry Apple's **Download on the App Store** badge.
+It is the official US/UK black lockup from Apple's
+[Marketing Resources](https://developer.apple.com/app-store/marketing/guidelines/),
+converted from their EPS to SVG. Nothing about the artwork was changed.
+
+Two things to know:
+
+1. **There is no app yet.** Both buttons currently point at the request form and
+   are marked `PITCH MOCKUP` in the source. Search for that string.
+2. Apple's guidelines cover how the badge may be used: don't recolor, crop,
+   rotate, redraw or add effects to it, keep clear space around it, and don't
+   make it smaller than any other app-store badge on the page. It's also meant
+   for apps that are actually listed. Take it off the live site until there is
+   a listing to link to.
 
 ---
 
