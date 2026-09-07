@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: "Archivo"; font-style: normal; font-weight: 400;
+    src: url("FONTDIR/archivo-latin-400-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Archivo"; font-style: normal; font-weight: 700;
+    src: url("FONTDIR/archivo-latin-700-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Archivo"; font-style: normal; font-weight: 800;
+    src: url("FONTDIR/archivo-latin-800-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Source Sans 3"; font-style: normal; font-weight: 400;
+    src: url("FONTDIR/source-sans-3-latin-400-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Source Sans 3"; font-style: normal; font-weight: 700;
+    src: url("FONTDIR/source-sans-3-latin-700-normal.woff2") format("woff2");
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #0B151C;
+    font-family: "Source Sans 3", sans-serif;
+    color: #E7EFF3;
+    display: flex;
+  }
+  .rail { width: 20px; background: #0E4E74; flex: 0 0 auto; }
+  .rail-amber { width: 8px; background: #F0964A; flex: 0 0 auto; }
+  .body {
+    flex: 1; padding: 64px 72px 58px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative;
+  }
+  .glow {
+    position: absolute; right: -200px; top: -200px;
+    width: 660px; height: 660px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(111,187,230,.18) 0%, rgba(111,187,230,0) 68%);
+  }
+  .eyebrow {
+    font-size: 21px; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: #F0964A;
+  }
+  .wordmark {
+    font-family: "Archivo", sans-serif;
+    font-weight: 800; text-transform: uppercase;
+    font-size: 90px; line-height: .94; letter-spacing: -.005em;
+    margin-top: 20px;
+  }
+  .tagline {
+    font-size: 30px; line-height: 1.35; color: #9DB2BE;
+    max-width: 21ch; margin-top: 22px; font-weight: 400;
+  }
+  .foot {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    border-top: 2px solid #223946; padding-top: 26px; gap: 40px;
+  }
+  .callblock { display: flex; flex-direction: column; gap: 6px; }
+  .lbl {
+    font-size: 18px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: #9DB2BE;
+  }
+  .num {
+    font-family: "Archivo", sans-serif;
+    font-weight: 800; font-size: 72px; line-height: 1;
+    font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+    color: #6FBBE6;
+  }
+  .place {
+    font-size: 22px; color: #9DB2BE; text-align: right;
+    line-height: 1.4; padding-bottom: 6px;
+  }
+  .place strong { display: block; color: #E7EFF3; font-weight: 700; font-size: 25px; }
+  .icon { position: absolute; right: 72px; top: 60px; }
+</style>
+</head>
+<body>
+  <div class="rail"></div>
+  <div class="rail-amber"></div>
+  <div class="body">
+    <div class="glow"></div>
+
+    <svg class="icon" width="150" height="150" viewBox="-4 -4 72 72" aria-hidden="true">
+      <circle cx="31" cy="41" r="15" fill="none" stroke="#6FBBE6" stroke-width="3.4"/>
+      <!-- knock-out halo so the seated figure reads clear of the wheel -->
+      <path d="M21 21 V35 H34 L40 49" fill="none" stroke="#0B151C"
+            stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="24" cy="10" r="9.4" fill="#0B151C"/>
+      <circle cx="24" cy="10" r="6" fill="#6FBBE6"/>
+      <path d="M21 21 V35 H34 L40 49" fill="none" stroke="#6FBBE6"
+            stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <div>
+      <div class="eyebrow">St.&nbsp;Paul &middot; Twin Cities</div>
+      <div class="wordmark">Ultimate<br>Transport</div>
+      <div class="tagline">Affordable wheelchair transportation, door through door.</div>
+    </div>
+
+    <div class="foot">
+      <div class="callblock">
+        <span class="lbl">Call to schedule</span>
+        <span class="num">651-274-1881</span>
+      </div>
+      <div class="place">
+        <strong>Billy O, owner</strong>
+        Ramp-equipped &middot; Twin Cities metro
+      </div>
+    </div>
+  </div>
+</body>
+</html>

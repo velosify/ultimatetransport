@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Ultimate Transport</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0E4E74" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B151C" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230E4E74'/%3E%3Ccircle cx='26' cy='14' r='6' fill='%23fff'/%3E%3Cpath d='M20 24h7v13h15v7H23a3 3 0 0 1-3-3z' fill='%23fff'/%3E%3Cpath d='M20 34a13 13 0 1 0 24 8' stroke='%23fff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  color-scheme: light dark;
+  --paper:#F1F4F5; --surface:#FFFFFF; --ink:#10202B; --ink-2:#4A5F6C;
+  --rule:#CFDBE0; --river:#0E4E74; --on-river:#FFFFFF; --amber:#B85416;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B151C; --surface:#122029; --ink:#E7EFF3; --ink-2:#9DB2BE;
+    --rule:#223946; --river:#6FBBE6; --on-river:#05202E; --amber:#F0964A;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B151C; --surface:#122029; --ink:#E7EFF3; --ink-2:#9DB2BE;
+  --rule:#223946; --river:#6FBBE6; --on-river:#05202E; --amber:#F0964A;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh;
+  background:var(--paper); color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  font-size:1.1rem; line-height:1.6;
+  display:flex; align-items:center; justify-content:center;
+  padding:2rem 1.25rem;
+}
+.box{width:min(100%,34rem)}
+.eyebrow{
+  font-size:.85rem; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--amber); margin:0 0 1rem;
+}
+h1{
+  font-family:"Archivo",Helvetica,Arial,sans-serif;
+  font-variation-settings:"wdth" 112;
+  font-size:clamp(2rem,1.5rem + 2.4vw,3rem); font-weight:700;
+  line-height:1.05; margin:0 0 .9rem; text-wrap:balance;
+}
+p{color:var(--ink-2); margin:0 0 1.6rem}
+.card{
+  background:var(--surface); border:1px solid var(--rule);
+  border-left:6px solid var(--river); padding:1.3rem 1.4rem;
+  display:flex; flex-direction:column; gap:.3rem; margin-bottom:1.6rem;
+}
+.card .lbl{
+  font-size:.85rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-2);
+}
+.card a{
+  font-family:"Archivo",Helvetica,Arial,sans-serif; font-weight:800;
+  font-size:clamp(2rem,1.4rem + 2.8vw,2.9rem); font-variant-numeric:tabular-nums;
+  color:var(--ink); text-decoration:none; line-height:1;
+}
+.card a:hover{color:var(--river)}
+.btn{
+  display:inline-flex; align-items:center; min-height:3.25rem;
+  padding:.75rem 1.4rem; border-radius:3px;
+  background:var(--river); color:var(--on-river);
+  font-weight:700; text-decoration:none; border:2px solid var(--river);
+}
+.btn:hover{filter:brightness(1.08)}
+a:focus-visible{outline:3px solid var(--river); outline-offset:3px}
+</style>
+</head>
+<body>
+  <div class="box">
+    <p class="eyebrow">Ultimate Transport</p>
+    <h1>That page isn&rsquo;t here.</h1>
+    <p>The link may be old or mistyped. If you were trying to book a ride, the fastest thing to do is call us &mdash; we&rsquo;ll take it from there.</p>
+    <div class="card">
+      <span class="lbl">Call to schedule</span>
+      <a href="tel:+16512741881">651&#8209;274&#8209;1881</a>
+    </div>
+    <a class="btn" href="/">Back to the main page</a>
+  </div>
+</body>
+</html>
