@@ -359,28 +359,33 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
 /* --- trips grid --- */
 .trips{
   list-style:none;margin:0;padding:0;
-  display:grid;gap:1rem;
+  display:grid;gap:.7rem;
+  grid-template-columns:repeat(2,minmax(0,1fr));   /* 2 x 4 on phones */
 }
-@media (min-width:44rem){ .trips{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media (min-width:70rem){ .trips{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (min-width:64rem){
+  .trips{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}  /* 4 x 2 on desktop */
+}
+.trips-note{margin:1.6rem 0 0;color:var(--ink-2);font-size:var(--s--1)}
 
 .trip{
   background:var(--paper);
   border:1.5px solid var(--rule);
-  border-radius:18px;
-  padding:1.5rem 1.4rem 1.6rem;
-  display:flex;flex-direction:column;gap:.85rem;
+  border-radius:16px;
+  padding:1.05rem 1rem 1.15rem;
+  display:flex;flex-direction:column;gap:.7rem;
   transition:border-color .2s ease, box-shadow .25s ease, transform .2s ease;
 }
+@media (min-width:64rem){ .trip{border-radius:18px;padding:1.5rem 1.35rem 1.6rem;gap:.85rem} }
 .trip-ico{
-  width:3rem;height:3rem;border-radius:14px;flex:none;
+  width:2.6rem;height:2.6rem;border-radius:12px;flex:none;
   background:var(--brand-soft);color:var(--brand);
   display:grid;place-items:center;
   transition:background .22s ease, color .22s ease, transform .25s ease;
 }
-.trip-ico svg{width:1.8rem;height:1.8rem;display:block}
-.trip b{display:block;font-size:var(--s-0);font-weight:700;line-height:1.3}
-.trip span{display:block;color:var(--ink-2);font-size:var(--s--1);line-height:1.55;margin-top:.3rem}
+.trip-ico svg{width:1.55rem;height:1.55rem;display:block}
+@media (min-width:64rem){ .trip-ico{width:3rem;height:3rem;border-radius:14px} .trip-ico svg{width:1.8rem;height:1.8rem} }
+.trip b{display:block;font-size:var(--s-0);font-weight:700;line-height:1.28;text-wrap:balance}
+.trip span{display:block;color:var(--ink-2);font-size:var(--s--1);line-height:1.5;margin-top:.28rem}
 
 .trip:hover{
   border-color:var(--brand);
@@ -850,17 +855,8 @@ footer a:hover{color:var(--brand)}
             <span>Weddings, funerals, holidays, birthdays.</span>
           </div>
         </li>
-        <li class="trip">
-          <span class="trip-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65"
-                 stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.8s6.8-6.3 6.8-10.8a6.8 6.8 0 1 0-13.6 0c0 4.5 6.8 10.8 6.8 10.8z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          </span>
-          <div>
-            <b>Anywhere else you need to be</b>
-            <span>If it&rsquo;s in the metro, just ask.</span>
-          </div>
-        </li>
       </ul>
+      <p class="trips-note">Somewhere not on this list? If it&rsquo;s in the metro, just ask.</p>
     </div>
   </section>
 
