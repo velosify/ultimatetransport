@@ -394,6 +394,8 @@ h1{
   .rc-chip{left:var(--gutter);bottom:30%}
   .hero-copy{padding-top:.25rem}
   .hero-sub{margin-bottom:1.4rem}
+  .hero-cta{align-items:center}
+  .hero-cta .pill{flex:1 1 auto}
 }
 @keyframes dash{to{stroke-dashoffset:-50}}
 @media (prefers-reduced-motion:reduce){
@@ -451,7 +453,10 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
 .trip-ico svg{width:1.55rem;height:1.55rem;display:block}
 @media (min-width:64rem){ .trip-ico{width:3rem;height:3rem;border-radius:14px} .trip-ico svg{width:1.8rem;height:1.8rem} }
 .trip b{display:block;font-size:var(--s-0);font-weight:700;line-height:1.28;text-wrap:balance}
-.trip span{display:block;color:var(--ink-2);font-size:var(--s--1);line-height:1.5;margin-top:.28rem}
+/* Scoped to the description. Plain `.trip span` also matched .trip-ico, which is
+   a span, and beat it on specificity: the bubble lost its display:grid and the
+   icon sat pinned to the top of it. */
+.trip > div > span{display:block;color:var(--ink-2);font-size:var(--s--1);line-height:1.5;margin-top:.28rem}
 
 .trip:hover{
   border-color:var(--brand);
