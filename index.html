@@ -334,6 +334,28 @@ h1{
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .rc-dash{stroke-dasharray:14 11;animation:dash 2.4s linear infinite}
 
+/* The van drives the route on a loop: it pulls away from the door, follows the
+   street path over the bridge, waits a beat at the clinic, then the trip
+   restarts. Without offset-path support it simply parks on the bridge. */
+.rc-van{transform:translate(132px,347px)}
+@supports (offset-path: path("M0 0 L1 1")){
+  .rc-van{
+    transform:none;
+    offset-path:path("M132 470 L132 260 Q132 244 148 244 L314 244 Q330 244 330 228 L330 184 Q330 168 346 168 L486 168");
+    offset-rotate:0deg;
+    offset-distance:0%;
+    animation:drive 7s linear infinite;
+  }
+}
+@keyframes drive{
+  0%   {offset-distance:0%;   opacity:0}
+  5%   {offset-distance:2%;   opacity:1}
+  72%  {offset-distance:100%; opacity:1}
+  88%  {offset-distance:100%; opacity:1}
+  96%  {offset-distance:100%; opacity:0}
+  100% {offset-distance:0%;   opacity:0}
+}
+
 /* On phones the map goes full-bleed above the copy and fades into the page,
    instead of sitting in a card beside it. */
 @media (max-width:640px){
@@ -366,7 +388,9 @@ h1{
 }
 @keyframes dash{to{stroke-dashoffset:-50}}
 @media (prefers-reduced-motion:reduce){
-  .rc-chip,.rc-dash{animation:none}
+  .rc-chip,.rc-dash,.rc-van{animation:none}
+  /* Park the van mid-crossing so the map still reads as a trip in progress. */
+  .rc-van{offset-distance:20%;opacity:1}
 }
 
 /* ============================================================
@@ -728,9 +752,11 @@ footer a:hover{color:var(--brand)}
               <rect x="475" y="102" width="22" height="8" rx="2.5"/>
             </g>
 
-            <!-- the van, mid-crossing -->
-            <circle cx="132" cy="347" r="16" fill="#0E3355"/>
-            <circle cx="132" cy="347" r="6" fill="#fff"/>
+            <!-- the van, driving the route on a loop (see .rc-van) -->
+            <g class="rc-van">
+              <circle r="16" fill="#0E3355"/>
+              <circle r="6" fill="#fff"/>
+            </g>
           </svg>
           <div class="rc-chip">
             <span class="dot"></span><span>Pickup at your door &middot; <b>St. Paul</b></span>
