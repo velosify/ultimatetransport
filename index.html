@@ -267,6 +267,17 @@ a{color:var(--brand)}
 }
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{display:none}
+/* On phones the bar drops away entirely and the logo floats on the map, which
+   starts at the very top of the page. The fixed call bar is the persistent CTA
+   down there, so nothing is lost by letting the nav scroll off. */
+@media (max-width:640px){
+  .nav{
+    position:absolute;inset:0 0 auto 0;
+    background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+    border-bottom:0;
+  }
+  .nav .wrap{min-height:3.9rem}
+}
 @media (min-width:900px){
   .nav-links{display:flex}
   .nav-cta{display:inline-flex}
@@ -283,21 +294,6 @@ a{color:var(--brand)}
 @media (min-width:980px){
   .hero .wrap{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
 }
-
-.badge{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.42rem .9rem .42rem .7rem;
-  border:1px solid var(--rule);border-radius:999px;
-  background:var(--wash);
-  font-size:var(--s--1);font-weight:600;color:var(--ink-2);
-  margin-bottom:1.4rem;
-}
-.badge .dot{
-  width:7px;height:7px;border-radius:50%;background:#17b26a;flex:none;
-  box-shadow:0 0 0 3px rgba(23,178,106,.2);
-  animation:pulse 2.6s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(23,178,106,.2)}50%{box-shadow:0 0 0 6px rgba(23,178,106,.06)}}
 
 h1{
   font-size:var(--s-4);font-weight:700;line-height:1.01;
@@ -350,14 +346,14 @@ h1{
   }
   .routecard{
     max-width:none;width:100vw;
-    aspect-ratio:1/1.14;
+    aspect-ratio:1/1.08;
     border:0;border-radius:0;box-shadow:none;
   }
   /* The map draws square, ending short of the card's bottom edge, so the fade
      has empty ground to dissolve into and never washes out the pickup marker. */
   .routecard svg{height:100vw}
   .routecard::after{
-    content:"";position:absolute;inset:auto 0 -1px 0;height:29%;z-index:2;
+    content:"";position:absolute;inset:auto 0 -1px 0;height:23%;z-index:2;
     background:linear-gradient(to bottom,
       rgba(255,255,255,0) 0%,
       rgba(255,255,255,.45) 32%,
@@ -370,7 +366,7 @@ h1{
 }
 @keyframes dash{to{stroke-dashoffset:-50}}
 @media (prefers-reduced-motion:reduce){
-  .rc-chip,.rc-dash,.badge .dot{animation:none}
+  .rc-chip,.rc-dash{animation:none}
 }
 
 /* ============================================================
@@ -642,7 +638,6 @@ footer a:hover{color:var(--brand)}
   <header class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="badge"><span class="dot"></span>Ramp-equipped &middot; door through door</span>
         <h1>Wheelchair rides across the <span class="mark">Twin Cities</span>.</h1>
         <p class="hero-sub">
           You stay in your own chair, the driver meets you at the door, and the fare is
