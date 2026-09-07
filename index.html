@@ -622,25 +622,23 @@ footer a:hover{color:var(--brand)}
               <rect x="80" y="404" width="36" height="38" rx="5"/>
             </g>
 
-            <!-- route -->
-            <path id="route" d="M150 468 C 150 396, 232 396, 232 330 S 330 250, 330 176 S 420 150, 462 150"
+            <!-- route: follows the street grid, no shortcuts through backyards -->
+            <path d="M132 470 L132 402 Q132 386 148 386 L314 386 Q330 386 330 370 L330 316 Q330 300 346 300 L470 300 Q486 300 486 284 L486 176"
                   fill="none" stroke="#0E3355" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".22"/>
-            <path class="rc-dash" d="M150 468 C 150 396, 232 396, 232 330 S 330 250, 330 176 S 420 150, 462 150"
+            <path class="rc-dash" d="M132 470 L132 402 Q132 386 148 386 L314 386 Q330 386 330 370 L330 316 Q330 300 346 300 L470 300 Q486 300 486 284 L486 176"
                   fill="none" stroke="#0E3355" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 
-            <!-- pickup -->
-            <circle cx="150" cy="468" r="20" fill="#fff"/>
-            <circle cx="150" cy="468" r="11" fill="#0E3355"/>
+            <!-- pickup, on the street outside the door -->
+            <circle cx="132" cy="470" r="20" fill="#fff"/>
+            <circle cx="132" cy="470" r="11" fill="#0E3355"/>
 
-            <!-- destination pin -->
-            <path d="M462 108c-21 0-38 17-38 38 0 27 38 62 38 62s38-35 38-62c0-21-17-38-38-38z" fill="#B4571C"/>
-            <circle cx="462" cy="146" r="13.5" fill="#fff"/>
+            <!-- destination pin, tip on the street it fronts -->
+            <path d="M486 76c-21 0-38 17-38 38 0 27 38 62 38 62s38-35 38-62c0-21-17-38-38-38z" fill="#B4571C"/>
+            <circle cx="486" cy="114" r="13.5" fill="#fff"/>
 
-            <!-- moving vehicle marker -->
-            <g>
-              <circle cx="232" cy="330" r="17" fill="#0E3355"/>
-              <circle cx="232" cy="330" r="6.5" fill="#fff"/>
-            </g>
+            <!-- vehicle, mid-route -->
+            <circle cx="330" cy="340" r="17" fill="#0E3355"/>
+            <circle cx="330" cy="340" r="6.5" fill="#fff"/>
           </svg>
           <div class="rc-chip">
             <span class="dot"></span><span>Pickup at your door &middot; <b>St. Paul</b></span>
