@@ -21,3 +21,11 @@
 # number whenever you replace one or browsers will hold the old file for a week.
 /assets/*
   Cache-Control: public, max-age=604800
+
+# The service worker must always be revalidated, or a stale copy pins the site.
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+  Service-Worker-Allowed: /
+
+/site.webmanifest
+  Cache-Control: public, max-age=0, must-revalidate

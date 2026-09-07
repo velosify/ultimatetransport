@@ -15,8 +15,9 @@ index.html          the site (self-contained: CSS and JS inline)
 404.html            not-found page, keeps the phone number in front of people
 robots.txt          crawler rules + sitemap pointer
 sitemap.xml         one URL, for Google Search Console
-site.webmanifest    icon set for "add to home screen"
+site.webmanifest    PWA manifest, drives the add-to-home-screen install
 _headers            Cloudflare Pages security + cache headers
+sw.js               service worker: install prompt support + offline fallback
 set-domain.sh       swaps the placeholder domain everywhere at once
 assets/
   icon.svg              favicon (scalable)
@@ -25,7 +26,8 @@ assets/
   icon-512.png          512×512, Android / manifest
   og-image.jpg          1200×630 link preview card (the skyline lockup)
   og-card.html          the earlier generated card, kept for reference only
-  app-store-badge.svg   Apple's official badge (US/UK black lockup)
+  icon-192.png          192×192, required for the Chrome install prompt
+  app-store-badge.svg   Apple's official badge, currently unused
 ```
 
 The only external request the page makes is to **Google Fonts** for Archivo and
@@ -150,22 +152,30 @@ it in all three `:root` blocks or one theme will break.
 
 ---
 
-## The App Store badge
+## Add to Home Screen
 
-The hero and the closing CTA carry Apple's **Download on the App Store** badge.
-It is the official US/UK black lockup from Apple's
-[Marketing Resources](https://developer.apple.com/app-store/marketing/guidelines/),
-converted from their EPS to SVG. Nothing about the artwork was changed.
+The hero and the closing CTA carry an **Add it to your Home Screen** button.
+There is no app; this installs the website itself, which for this audience
+gets most of the way there: an icon with the other apps, opening straight to
+this page, and the phone number reachable with no signal.
 
-Two things to know:
+How it behaves, by browser:
 
-1. **There is no app yet.** Both buttons currently point at the request form and
-   are marked `PITCH MOCKUP` in the source. Search for that string.
-2. Apple's guidelines cover how the badge may be used: don't recolor, crop,
-   rotate, redraw or add effects to it, keep clear space around it, and don't
-   make it smaller than any other app-store badge on the page. It's also meant
-   for apps that are actually listed. Take it off the live site until there is
-   a listing to link to.
+| Where | What the button does |
+|---|---|
+| Chrome, Edge, Android | Fires the browser's real install prompt (`beforeinstallprompt`, captured and replayed on click) |
+| Safari on iOS | Opens a sheet with the Share → Add to Home Screen steps. **iOS has no install API**, so no site can do this programmatically |
+| Already installed | Button stays hidden |
+| Anything else | Button stays hidden rather than promising something it can't do |
+
+The moving parts: `site.webmanifest` (needs `display: standalone` and both a
+192px and 512px icon, or Chrome won't offer the prompt), `sw.js` (a
+network-first service worker, needed for a reliable prompt and for offline),
+and the install script at the bottom of `index.html`.
+
+`assets/app-store-badge.svg` is still in the repo, unused. Apple's official
+badge is only for apps actually listed on the App Store, so it should not go
+back on the live site until there's a listing to link to.
 
 ---
 
