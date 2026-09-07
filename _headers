@@ -16,6 +16,8 @@
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
 
-# Fingerprint-free static assets: cache hard, bust by renaming the file.
+# Static assets: cache hard. The icons and the link-preview card are referenced
+# with a ?v= query in index.html, 404.html and site.webmanifest, so bump that
+# number whenever you replace one or browsers will hold the old file for a week.
 /assets/*
   Cache-Control: public, max-age=604800

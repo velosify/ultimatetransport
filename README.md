@@ -129,6 +129,13 @@ Everything is in `index.html`. The pieces you'll most likely touch:
 | Service area towns | the two `.mq-row` marquee rows (each town appears **twice**, the duplicate set makes the scroll loop seamless), and `areaServed` in the JSON-LD block |
 | Colors | the CSS custom properties in `:root` (light) and the two dark-theme blocks |
 | Link preview card | edit `assets/og-card.html`, screenshot it at 1200×630, save over `assets/og-image.png` |
+| Favicon / app icons | replace the files in `assets/`, then **bump the `?v=` number** on every `/assets/` reference in `index.html`, `404.html` and `site.webmanifest` |
+
+Anything under `assets/` is cached by browsers for a week (see `_headers`), so a
+replaced icon will not appear until the `?v=` number changes. Bump it in all
+three files at once or you'll get a mix of old and new. Chrome also keeps its
+own favicon store, so after deploying, a hard reload plus reopening the tab is
+sometimes needed to see the change on a machine that visited the old version.
 
 Four answers in the FAQ carry a `BILL TO CONFIRM` comment in the source. Search for
 that string before the site gets promoted anywhere.
