@@ -23,8 +23,8 @@ assets/
   favicon-32.png        favicon fallback
   apple-touch-icon.png  180×180, iOS home screen
   icon-512.png          512×512, Android / manifest
-  og-image.png          1200×630 link preview card
-  og-card.html          source for og-image.png, edit + re-screenshot to change it
+  og-image.jpg          1200×630 link preview card (the skyline lockup)
+  og-card.html          the earlier generated card, kept for reference only
   app-store-badge.svg   Apple's official badge (US/UK black lockup)
 ```
 
@@ -129,7 +129,7 @@ Everything is in `index.html`. The pieces you'll most likely touch:
 | FAQ answers | the `<details>` blocks in the FAQ section, and the matching `FAQPage` JSON-LD in `<head>`. Change both |
 | Service area towns | the two `.mq-row` marquee rows (each town appears **twice**, the duplicate set makes the scroll loop seamless), and `areaServed` in the JSON-LD block |
 | Colors | the CSS custom properties in `:root` (light) and the two dark-theme blocks |
-| Link preview card | edit `assets/og-card.html`, screenshot it at 1200×630, save over `assets/og-image.png` |
+| Link preview card | replace `assets/og-image.jpg` with a new 1200×630 image, then **bump the `?v=` number** on the three og-image URLs in `index.html` |
 | Favicon / app icons | replace the files in `assets/`, then **bump the `?v=` number** on every `/assets/` reference in `index.html`, `404.html` and `site.webmanifest` |
 
 Anything under `assets/` is cached by browsers for a week (see `_headers`), so a
