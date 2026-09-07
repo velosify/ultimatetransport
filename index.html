@@ -646,13 +646,19 @@ footer a:hover{color:var(--brand)}
             <path class="rc-dash" d="M132 470 L132 260 Q132 244 148 244 L314 244 Q330 244 330 228 L330 184 Q330 168 346 168 L486 168" fill="none" stroke="#0E3355" stroke-width="9"
                   stroke-linecap="round" stroke-linejoin="round"/>
 
-            <!-- pickup, on the street outside the door -->
-            <circle cx="132" cy="470" r="20" fill="#fff"/>
-            <circle cx="132" cy="470" r="11" fill="#0E3355"/>
+            <!-- pickup: home, on the street outside the door -->
+            <circle cx="132" cy="470" r="22" fill="#fff" stroke="#0E3355" stroke-width="3"/>
+            <g fill="none" stroke="#0E3355" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M121 471 L132 461.5 L143 471"/>
+              <path d="M124.5 469.5 V479.5 H139.5 V469.5"/>
+            </g>
 
-            <!-- destination pin, tip on the street it fronts -->
+            <!-- destination: clinic or hospital, pin tip on the street it fronts -->
             <path d="M486 68c-21 0-38 17-38 38 0 27 38 62 38 62s38-35 38-62c0-21-17-38-38-38z" fill="#B4571C"/>
-            <circle cx="486" cy="106" r="13.5" fill="#fff"/>
+            <g fill="#fff">
+              <rect x="482" y="95" width="8" height="22" rx="2.5"/>
+              <rect x="475" y="102" width="22" height="8" rx="2.5"/>
+            </g>
 
             <!-- the van, mid-crossing -->
             <circle cx="132" cy="347" r="16" fill="#0E3355"/>
