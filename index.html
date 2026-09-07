@@ -549,9 +549,9 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
   background:var(--paper);border:1px solid var(--rule);border-radius:22px;
   box-shadow:var(--shadow-card);padding:clamp(1.3rem,3.5vw,2.25rem);max-width:46rem;
 }
-.fields{display:grid;gap:1.15rem}
-@media (min-width:40rem){ .fields{grid-template-columns:1fr 1fr} }
-.field{display:flex;flex-direction:column;gap:.4rem}
+.fields{display:grid;gap:1.15rem;grid-template-columns:minmax(0,1fr)}
+@media (min-width:40rem){ .fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+.field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
 .field.full{grid-column:1/-1}
 label{font-weight:700;font-size:var(--s--1)}
 label .opt{font-weight:400;color:var(--ink-3)}
@@ -561,12 +561,22 @@ input,select,textarea{
   padding:.75rem .9rem;min-height:3.15rem;width:100%;
   transition:border-color .15s ease, background .15s ease;
 }
+/* iOS Safari gives date and time inputs a wide intrinsic size, and a grid
+   item's default min-width:auto refuses to shrink below it, which pushed the
+   whole form off the right edge of the screen. These let them shrink. */
+input,select,textarea{max-width:100%;min-width:0}
+input[type="date"],input[type="time"]{-webkit-appearance:none;appearance:none}
+input[type="date"]::-webkit-date-and-time-value,
+input[type="time"]::-webkit-date-and-time-value{text-align:left;min-width:0}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator{margin-inline-start:auto}
 input:hover,select:hover,textarea:hover{border-color:var(--rule-strong)}
 input:focus,select:focus,textarea:focus{background:var(--paper);border-color:var(--brand)}
 textarea{min-height:6.25rem;resize:vertical;line-height:1.5}
 select{appearance:none}
 input::placeholder,textarea::placeholder{color:var(--ink-3)}
 .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.6rem}
+.actions .pill{max-width:100%;white-space:normal;text-align:center}
 .status{margin:.9rem 0 0;font-size:var(--s--1);font-weight:600;color:var(--brand);min-height:1.35em}
 .formnote{margin:1.1rem 0 0;font-size:var(--s--1);color:var(--ink-3);line-height:1.6}
 .preview{margin-top:1.3rem;border-top:1px solid var(--rule);padding-top:1.2rem}
