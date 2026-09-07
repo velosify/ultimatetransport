@@ -536,6 +536,13 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
 .sec--blue .row p{color:#E4EFF8}
 .sec--blue a{color:#FFFFFF}
 .sec--blue a:focus-visible{outline-color:#FFFFFF}
+/* A white card sitting on the blue panel keeps the page's normal colors, so
+   the panel rules above stop at its edge. */
+.sec--blue .formcard{color:var(--ink)}
+.sec--blue .formcard a{color:var(--brand)}
+.sec--blue .formcard a:focus-visible{outline-color:var(--brand)}
+.sec--blue .formcard .pill-brand{color:var(--on-brand)}
+.sec--blue .formcard .pill-ghost{color:var(--ink)}
 
 /* --- area split --- */
 .area{display:grid;gap:2rem}
@@ -1056,7 +1063,7 @@ footer a:hover{color:var(--brand)}
   </section>
 
   <!-- ============================ REQUEST ============================ -->
-  <section id="request" class="sec">
+  <section id="request" class="sec sec--blue">
     <div class="wrap">
       <div class="head">
         <span class="tag">Request a ride</span>
