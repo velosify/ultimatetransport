@@ -394,8 +394,13 @@ h1{
   .rc-chip{left:var(--gutter);bottom:30%}
   .hero-copy{padding-top:.25rem}
   .hero-sub{margin-bottom:1.4rem}
-  .hero-cta{align-items:center}
-  .hero-cta .pill{flex:1 1 auto}
+  /* Keep the call button and the badge on one row at every phone width. Both
+     take their height from --cta-h so they always match, and the badge scales
+     with the viewport (never below 44px, which is both Apple's floor for the
+     badge and the minimum comfortable tap target). */
+  .hero-cta{--cta-h:clamp(2.75rem,11.5vw,3.25rem);flex-wrap:nowrap;align-items:center;gap:.7rem}
+  .hero-cta .pill{flex:1 1 auto;min-width:0;min-height:var(--cta-h);padding-inline:1rem}
+  .hero-cta .appbadge img{height:var(--cta-h)}
 }
 @keyframes dash{to{stroke-dashoffset:-50}}
 @media (prefers-reduced-motion:reduce){
@@ -722,7 +727,7 @@ footer a:hover{color:var(--brand)}
         <div class="hero-cta">
           <a class="pill pill-brand" href="tel:+16512741881">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-            Call 651-274-1881
+            Call Us
           </a>
           <!-- PITCH MOCKUP: there is no app yet. Delete this button, or point it at a
                real App Store listing, before this page is promoted anywhere. -->
