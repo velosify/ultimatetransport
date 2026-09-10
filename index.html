@@ -793,7 +793,10 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
 }
 .panel + .panel{margin-top:1rem}
 .panel:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
-.panel-ico{width:clamp(2.6rem,6vw,3.4rem);height:auto;color:#B5DAF2;margin-bottom:.9rem;display:block}
+/* Not a stock glyph: the same dashed route, home marker and clinic pin the map
+   in the hero uses, with the van sitting wherever this step happens. It doubles
+   as a progress indicator for the four steps. */
+.panel-track{display:block;width:100%;max-width:20rem;height:auto;margin-bottom:1.2rem}
 .panel h3{font-size:var(--s-2);font-weight:700;margin:0 0 .6rem;line-height:1.15;color:#FFFFFF;max-width:20ch}
 .panel p{margin:0;color:#E4EFF8;font-size:var(--s-0);line-height:1.6;max-width:46ch}
 .panel-kicker{
@@ -1340,29 +1343,25 @@ footer a:hover{color:var(--brand)}
         </div>
         <div class="how-panels">
         <div class="panel" id="panel-01" role="tabpanel" aria-labelledby="step-01" tabindex="0">
-          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 30a30 30 0 0 0 13 13l4.4-4.4a2 2 0 0 1 2-.5 22.8 22.8 0 0 0 7.2 1.2 2 2 0 0 1 2 2V48a2 2 0 0 1-2 2A34 34 0 0 1 7 16a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2c0 2.5.4 4.9 1.14 7.2a2 2 0 0 1-.5 2z"/><path d="M38 6h14a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-6l-5.4 4.2V22h-2.6a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z"/></svg>
+          <svg class="panel-track" viewBox="0 0 318 48" role="img" aria-label="Step one of four: the call. Nothing has moved yet."><path d="M30 24 H288" stroke="#8FC1E6" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="9 8" fill="none"/><circle cx="30" cy="24" r="17.5" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".4"/><circle cx="30" cy="24" r="12.5" fill="#1C5A8C" stroke="#FFFFFF" stroke-width="2.5"/><path d="M23.5 24.5 L30 19 L36.5 24.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.6 23.4 V30 H34.4 V23.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="288" cy="24" r="12.5" fill="#B4571C"/><rect x="285.4" y="17.5" width="5.2" height="13" rx="1.6" fill="#FFFFFF"/><rect x="281.4" y="21.5" width="13" height="5.2" rx="1.6" fill="#FFFFFF"/></svg>
           <h3>Call and book</h3>
           <p>Give us the date, the pickup address, where you&rsquo;re headed, and what time you need to be there. We quote the fare on that same call. A day or two of notice helps, but ask about same-day, because sometimes we can make it work.</p>
           <p class="panel-kicker">You&rsquo;ll be on the phone about three minutes.</p>
         </div>
         <div class="panel" id="panel-02" role="tabpanel" aria-labelledby="step-02" tabindex="0">
-          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20h28a4 4 0 0 1 3.3 1.8L44 32h6a4 4 0 0 1 4 4v8H6z"/><circle cx="18" cy="44" r="5"/><circle cx="44" cy="44" r="5"/><path d="M6 44 L2 52h22"/><path d="M14 20v12h20"/></svg>
+          <svg class="panel-track" viewBox="0 0 318 48" role="img" aria-label="Step two of four: the van has left your door."><path d="M30 24 H288" stroke="#8FC1E6" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="9 8" fill="none"/><path d="M30 24 H66" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/><circle cx="30" cy="24" r="12.5" fill="#1C5A8C" stroke="#FFFFFF" stroke-width="2.5"/><path d="M23.5 24.5 L30 19 L36.5 24.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.6 23.4 V30 H34.4 V23.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="288" cy="24" r="12.5" fill="#B4571C"/><rect x="285.4" y="17.5" width="5.2" height="13" rx="1.6" fill="#FFFFFF"/><rect x="281.4" y="21.5" width="13" height="5.2" rx="1.6" fill="#FFFFFF"/><circle cx="66" cy="24" r="9" fill="#FFFFFF"/><circle cx="66" cy="24" r="3.4" fill="#1C5A8C"/></svg>
           <h3>We come to your door</h3>
           <p>The driver meets you at the door, not just the curb, and helps you down the ramp and into the van. Your chair is locked with a four-point securement system and you wear a lap and shoulder belt, same as any seat.</p>
           <p class="panel-kicker">Door through door, not curb to curb.</p>
         </div>
         <div class="panel" id="panel-03" role="tabpanel" aria-labelledby="step-03" tabindex="0">
-          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M34 8h16a2 2 0 0 1 2 2v44a2 2 0 0 1-2 2H34"/><path d="M8 32h20"/><path d="M20 24l8 8-8 8"/><circle cx="44" cy="32" r="2"/></svg>
+          <svg class="panel-track" viewBox="0 0 318 48" role="img" aria-label="Step three of four: arrived at the clinic."><path d="M30 24 H288" stroke="#8FC1E6" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="9 8" fill="none"/><path d="M30 24 H258" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/><circle cx="30" cy="24" r="12.5" fill="#1C5A8C" stroke="#FFFFFF" stroke-width="2.5"/><path d="M23.5 24.5 L30 19 L36.5 24.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.6 23.4 V30 H34.4 V23.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="288" cy="24" r="12.5" fill="#B4571C"/><rect x="285.4" y="17.5" width="5.2" height="13" rx="1.6" fill="#FFFFFF"/><rect x="281.4" y="21.5" width="13" height="5.2" rx="1.6" fill="#FFFFFF"/><circle cx="258" cy="24" r="9" fill="#FFFFFF"/><circle cx="258" cy="24" r="3.4" fill="#1C5A8C"/></svg>
           <h3>Inside, not just outside</h3>
           <p>We walk you in to the front desk if you&rsquo;d like, and carry whatever you brought with you. A family member or aide is welcome to ride along.</p>
           <p class="panel-kicker">Someone can ride along with you.</p>
         </div>
         <div class="panel" id="panel-04" role="tabpanel" aria-labelledby="step-04" tabindex="0">
-          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 10a22 22 0 1 1-15.6 6.4"/><path d="M10 8v10h10"/><path d="M32 20v13l8 5"/></svg>
+          <svg class="panel-track" viewBox="0 0 318 48" role="img" aria-label="Step four of four: on the way back home."><path d="M30 24 H288" stroke="#8FC1E6" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="9 8" fill="none"/><path d="M168 24 H288" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/><circle cx="30" cy="24" r="12.5" fill="#1C5A8C" stroke="#FFFFFF" stroke-width="2.5"/><path d="M23.5 24.5 L30 19 L36.5 24.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.6 23.4 V30 H34.4 V23.4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="288" cy="24" r="12.5" fill="#B4571C"/><rect x="285.4" y="17.5" width="5.2" height="13" rx="1.6" fill="#FFFFFF"/><rect x="281.4" y="21.5" width="13" height="5.2" rx="1.6" fill="#FFFFFF"/><circle cx="168" cy="24" r="9" fill="#FFFFFF"/><circle cx="168" cy="24" r="3.4" fill="#1C5A8C"/></svg>
           <h3>And back again</h3>
           <p>When you&rsquo;re done, call and we&rsquo;ll come back for the return trip. If the appointment runs long, that&rsquo;s normal. Call the cell and we&rsquo;ll adjust.</p>
           <p class="panel-kicker">Running late is normal. Just call.</p>
