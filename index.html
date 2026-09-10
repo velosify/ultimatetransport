@@ -753,21 +753,63 @@ h2{font-size:var(--s-2);font-weight:700;line-height:1.08;margin:0 0 .75rem;max-w
 @media (prefers-reduced-motion:reduce){ .mq-row{animation:none} }
 .mq-note{margin:1.6rem auto 0;text-align:center;color:var(--ink-3);font-size:var(--s--1);max-width:34rem}
 
-/* --- numbered rows --- */
-.rows{display:grid;gap:0;border-top:1px solid var(--rule)}
-.row{
-  display:grid;gap:.4rem 2rem;padding:clamp(1.5rem,3vw,2.25rem) 0;
-  border-bottom:1px solid var(--rule);
-  grid-template-columns:auto 1fr;align-items:start;
+/* --- the four steps, as a stepper ---
+   One step at a time rather than four blocks of text at once. With JavaScript
+   off every panel simply shows and the section reads as a plain numbered list. */
+.how-ui{display:grid;gap:1.5rem}
+@media (min-width:52rem){ .how-ui{grid-template-columns:20rem 1fr;gap:3rem;align-items:start} }
+
+.how-panels{min-width:0}
+.how-steps{display:flex;flex-direction:column}
+.step{
+  display:flex;align-items:center;gap:1rem;width:100%;
+  padding:1rem 1rem 1rem 0;background:none;border:0;cursor:pointer;text-align:left;
+  color:inherit;font:inherit;border-bottom:1px solid rgba(255,255,255,.22);
 }
-@media (min-width:52rem){ .row{grid-template-columns:5rem 15rem 1fr;gap:0 2.25rem;align-items:baseline} }
-.ix{
-  font-size:var(--s-1);font-weight:800;color:var(--brand);
-  font-variant-numeric:tabular-nums;line-height:1.2;
+.step:last-child{border-bottom:0}
+.step-n{
+  flex:none;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;
+  border:2px solid rgba(255,255,255,.4);color:#DCEAF7;
+  font-weight:800;font-size:var(--s--1);font-variant-numeric:tabular-nums;
+  transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
 }
-.row h3{font-size:var(--s-1);font-weight:700;margin:0;line-height:1.25}
-.row p{margin:.35rem 0 0;color:var(--ink-2);font-size:var(--s--1);line-height:1.65;max-width:40rem;grid-column:1/-1}
-@media (min-width:52rem){ .row p{margin:0;grid-column:auto} }
+.step-t{font-size:var(--s-0);font-weight:700;color:#E4EFF8;transition:color .2s ease}
+.step:hover .step-n{border-color:#FFFFFF}
+.step:hover .step-t{color:#FFFFFF}
+.step[aria-selected="true"] .step-n{
+  background:#FFFFFF;border-color:#FFFFFF;color:var(--brand);transform:scale(1.06);
+}
+.step[aria-selected="true"] .step-t{color:#FFFFFF}
+.step:focus-visible{outline:3px solid #FFFFFF;outline-offset:-3px;border-radius:12px}
+
+@media (max-width:51.99rem){
+  .step{padding:.8rem .5rem .8rem 0;gap:.8rem}
+  .step-n{width:2.3rem;height:2.3rem}
+  .how-ui{gap:1.1rem}
+}
+.panel{
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
+  border-radius:20px;padding:clamp(1.3rem,3vw,2rem);
+}
+.panel + .panel{margin-top:1rem}
+.panel:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.panel-ico{width:clamp(2.6rem,6vw,3.4rem);height:auto;color:#B5DAF2;margin-bottom:.9rem;display:block}
+.panel h3{font-size:var(--s-2);font-weight:700;margin:0 0 .6rem;line-height:1.15;color:#FFFFFF;max-width:20ch}
+.panel p{margin:0;color:#E4EFF8;font-size:var(--s-0);line-height:1.6;max-width:46ch}
+.panel-kicker{
+  margin-top:1.1rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.22);
+  font-size:var(--s--1);color:#B5DAF2;font-weight:600;
+}
+/* Only once the script has taken over does one panel show at a time. */
+.js-steps .panel{display:none}
+.js-steps .panel + .panel{margin-top:0}
+.js-steps .panel.is-current{display:block;animation:panelIn .32s cubic-bezier(.2,.7,.3,1) both}
+@keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .step-n,.step-t{transition:none}
+  .step[aria-selected="true"] .step-n{transform:none}
+  .js-steps .panel.is-current{animation:none}
+}
 
 /* --- "How it works" runs on a blue panel, white type ---
    Blue is #1C5A8C rather than a pale tint because white body copy on a pale
@@ -1269,34 +1311,62 @@ footer a:hover{color:var(--brand)}
         <h2>Four steps, start to finish.</h2>
         <p>No app, no account, no waiting on hold. One phone call sets the whole thing up.</p>
       </div>
-      <div class="rows">
-        <div class="row">
-          <div class="ix">01</div>
+      <div class="how-ui">
+        <div class="how-steps" role="tablist" aria-label="The four steps of a ride">
+          <button class="step" id="step-01" role="tab" type="button"
+                  aria-selected="true" aria-controls="panel-01"
+                  tabindex="0">
+            <span class="step-n">01</span>
+            <span class="step-t">Call and book</span>
+          </button>
+          <button class="step" id="step-02" role="tab" type="button"
+                  aria-selected="false" aria-controls="panel-02"
+                  tabindex="-1">
+            <span class="step-n">02</span>
+            <span class="step-t">We come to your door</span>
+          </button>
+          <button class="step" id="step-03" role="tab" type="button"
+                  aria-selected="false" aria-controls="panel-03"
+                  tabindex="-1">
+            <span class="step-n">03</span>
+            <span class="step-t">Inside, not just outside</span>
+          </button>
+          <button class="step" id="step-04" role="tab" type="button"
+                  aria-selected="false" aria-controls="panel-04"
+                  tabindex="-1">
+            <span class="step-n">04</span>
+            <span class="step-t">And back again</span>
+          </button>
+        </div>
+        <div class="how-panels">
+        <div class="panel" id="panel-01" role="tabpanel" aria-labelledby="step-01" tabindex="0">
+          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 30a30 30 0 0 0 13 13l4.4-4.4a2 2 0 0 1 2-.5 22.8 22.8 0 0 0 7.2 1.2 2 2 0 0 1 2 2V48a2 2 0 0 1-2 2A34 34 0 0 1 7 16a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2c0 2.5.4 4.9 1.14 7.2a2 2 0 0 1-.5 2z"/><path d="M38 6h14a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-6l-5.4 4.2V22h-2.6a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z"/></svg>
           <h3>Call and book</h3>
-          <p>Give us the date, the pickup address, where you&rsquo;re headed, and what time you
-             need to be there. We quote the fare on that same call. A day or two of notice
-             helps, but ask about same-day,
-             because sometimes we can make it work.</p>
+          <p>Give us the date, the pickup address, where you&rsquo;re headed, and what time you need to be there. We quote the fare on that same call. A day or two of notice helps, but ask about same-day, because sometimes we can make it work.</p>
+          <p class="panel-kicker">You&rsquo;ll be on the phone about three minutes.</p>
         </div>
-        <div class="row">
-          <div class="ix">02</div>
+        <div class="panel" id="panel-02" role="tabpanel" aria-labelledby="step-02" tabindex="0">
+          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20h28a4 4 0 0 1 3.3 1.8L44 32h6a4 4 0 0 1 4 4v8H6z"/><circle cx="18" cy="44" r="5"/><circle cx="44" cy="44" r="5"/><path d="M6 44 L2 52h22"/><path d="M14 20v12h20"/></svg>
           <h3>We come to your door</h3>
-          <p>The driver meets you at the door, not just the curb, and helps you down the ramp
-             and into the van. Your chair is locked with a four-point securement system and
-             you wear a lap and shoulder belt, same as any seat.</p>
+          <p>The driver meets you at the door, not just the curb, and helps you down the ramp and into the van. Your chair is locked with a four-point securement system and you wear a lap and shoulder belt, same as any seat.</p>
+          <p class="panel-kicker">Door through door, not curb to curb.</p>
         </div>
-        <div class="row">
-          <div class="ix">03</div>
+        <div class="panel" id="panel-03" role="tabpanel" aria-labelledby="step-03" tabindex="0">
+          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M34 8h16a2 2 0 0 1 2 2v44a2 2 0 0 1-2 2H34"/><path d="M8 32h20"/><path d="M20 24l8 8-8 8"/><circle cx="44" cy="32" r="2"/></svg>
           <h3>Inside, not just outside</h3>
-          <p>We walk you in to the front desk if you&rsquo;d like, and carry whatever you brought
-             with you. A family member or aide is welcome to ride along.</p>
+          <p>We walk you in to the front desk if you&rsquo;d like, and carry whatever you brought with you. A family member or aide is welcome to ride along.</p>
+          <p class="panel-kicker">Someone can ride along with you.</p>
         </div>
-        <div class="row">
-          <div class="ix">04</div>
+        <div class="panel" id="panel-04" role="tabpanel" aria-labelledby="step-04" tabindex="0">
+          <svg class="panel-ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 10a22 22 0 1 1-15.6 6.4"/><path d="M10 8v10h10"/><path d="M32 20v13l8 5"/></svg>
           <h3>And back again</h3>
-          <p>When you&rsquo;re done, call and we&rsquo;ll come back for the return trip. If the
-             appointment runs long, that&rsquo;s normal. Call the
-             cell and we&rsquo;ll adjust.</p>
+          <p>When you&rsquo;re done, call and we&rsquo;ll come back for the return trip. If the appointment runs long, that&rsquo;s normal. Call the cell and we&rsquo;ll adjust.</p>
+          <p class="panel-kicker">Running late is normal. Just call.</p>
+        </div>
         </div>
       </div>
     </div>
@@ -1717,7 +1787,8 @@ footer a:hover{color:var(--brand)}
     ".sec > .wrap > .head",
     ".trips > .trip",
     ".trips-note",
-    ".rows > .row",
+    ".how-steps > .step",
+    ".how-panels",
     ".area > *",
     ".formcard", ".formnote",
     ".faq > details",
@@ -1884,5 +1955,63 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+
+<script>
+/* "How it works" as a stepper.
+ *
+ * Progressive enhancement: the markup ships with all four panels visible, so
+ * with scripting off the section is a plain numbered list and nothing is
+ * hidden. This adds .js-steps, which is what collapses it to one at a time.
+ * Standard tab keyboard model: arrows move, Home and End jump to the ends. */
+(function () {
+  var list = document.querySelector(".how-steps");
+  var wrap = document.querySelector(".how-ui");
+  if (!list || !wrap) return;
+
+  var tabs = Array.prototype.slice.call(list.querySelectorAll(".step"));
+  var panels = Array.prototype.slice.call(document.querySelectorAll(".how-panels .panel"));
+  if (tabs.length !== panels.length || !tabs.length) return;
+
+  wrap.classList.add("js-steps");
+
+  function select(i, moveFocus) {
+    tabs.forEach(function (t, n) {
+      var on = n === i;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      panels[n].classList.toggle("is-current", on);
+    });
+    if (moveFocus) tabs[i].focus();
+  }
+
+  var panelBox = document.querySelector(".how-panels");
+  var calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // On a phone the step list sits above the panel, so a tap near the top can
+  // change something the reader cannot see. Only scroll when that is the case.
+  function revealPanel() {
+    if (!panelBox) return;
+    var box = panelBox.getBoundingClientRect();
+    if (box.top < window.innerHeight - 80) return;
+    panelBox.scrollIntoView({ behavior: calm.matches ? "auto" : "smooth", block: "nearest" });
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { select(i, false); revealPanel(); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (i + 1) % tabs.length;
+      else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = tabs.length - 1;
+      if (next === null) return;
+      e.preventDefault();
+      select(next, true);
+    });
+  });
+
+  select(0, false);
+})();
+</script>
 </body>
 </html>
